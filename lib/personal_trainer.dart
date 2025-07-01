@@ -11,6 +11,9 @@ class PersonalTrainer extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Personal Trainer',
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+      ),
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
         breakpoints: [
