@@ -2,7 +2,7 @@
 
 echo "🚀 Smart deploy..."
 
-# Build com CanvasKit
+# Build com release
 flutter build web --release
 
 # Verifica se build/web existe
@@ -11,14 +11,17 @@ if [ ! -d "build/web" ]; then
     exit 1
 fi
 
-# Remove qualquer .git dentro de build/web (evita submodule)
+# Copia vercel.json para build/web se existir
+if [ -f "vercel.json" ]; then
+    echo "📄 Copiando vercel.json..."
+    cp vercel.json build/web/
+fi
+
+# Remove qualquer .git dentro de build/web
 if [ -d "build/web/.git" ]; then
     echo "🧹 Removendo .git de build/web..."
     rm -rf build/web/.git
 fi
-
-echo "📁 Verificando arquivos no build/web:"
-ls -la build/web/
 
 # Remove do cache se já existe como submodule
 git rm -r --cached build/web/ 2>/dev/null || true
