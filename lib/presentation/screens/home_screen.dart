@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/presentation/components/header.dart';
+import 'package:personal_trainer/presentation/widgets/header.dart';
+import 'package:personal_trainer/presentation/widgets/hero_banner.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Header(),
+          HeroBanner(),
         ],
       ),
     );

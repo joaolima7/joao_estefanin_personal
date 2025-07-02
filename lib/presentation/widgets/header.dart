@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../config/appearance/app_colors.dart';
+import '../components/menu_item.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
@@ -21,7 +22,7 @@ class Header extends StatelessWidget {
     final isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: (!isMobile && !isTablet) ? 0 : 20, vertical: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -33,7 +34,7 @@ class Header extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: (!isMobile && !isTablet) ? MainAxisAlignment.spaceAround : MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
@@ -60,13 +61,9 @@ class Header extends StatelessWidget {
               spacing: 20,
               children: [
                 for (final item in menuItems)
-                  Text(
-                    item,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.neutralGreyDark.withAlpha(200),
-                      fontWeight: FontWeight.w500,
-                    ),
+                  MenuItem(
+                    text: item,
+                    onTap: () {},
                   ),
               ],
             )
