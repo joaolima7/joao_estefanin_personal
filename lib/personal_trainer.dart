@@ -10,6 +10,7 @@ class PersonalTrainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Estefanin Personal Trainer',
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
