@@ -42,7 +42,7 @@ class HeroBanner extends StatelessWidget {
                     onPressed: () {},
                   ),
                   _buildDivider(sizeScreen),
-                  if (!isMobile) _buildStatsRow(),
+                  _buildStatsRow(),
                 ],
               ),
             ),

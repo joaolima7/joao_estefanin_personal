@@ -10,11 +10,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: const MobileDrawer(),
-      body: Column(
-        children: [
-          Header(),
-          HeroBanner(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Header(),
+            HeroBanner(),
+          ],
+        ),
       ),
     );
   }

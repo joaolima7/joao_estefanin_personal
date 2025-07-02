@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import '../../config/appearance/app_colors.dart';
 
 class StatItem extends StatelessWidget {
@@ -13,6 +14,9 @@ class StatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -20,7 +24,11 @@ class StatItem extends StatelessWidget {
           number,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 28,
+            fontSize: isMobile
+                ? 18
+                : isTablet
+                ? 22
+                : 28,
             fontWeight: FontWeight.w800,
             color: AppColors.primary,
           ),
@@ -28,8 +36,12 @@ class StatItem extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 14,
+          style: TextStyle(
+            fontSize: isMobile
+                ? 8
+                : isTablet
+                ? 12
+                : 14,
             color: Colors.white70,
             fontWeight: FontWeight.w500,
           ),
