@@ -5,7 +5,14 @@ import '../../config/appearance/app_colors.dart';
 import '../components/menu_item.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  const Header({
+    super.key,
+    this.isScrolled = false,
+    required this.onMenuItemSelected,
+  });
+
+  final bool isScrolled;
+  final ValueChanged<int> onMenuItemSelected;
 
   final List<String> menuItems = const [
     'Início',
@@ -21,18 +28,33 @@ class Header extends StatelessWidget {
     final isMobile = ResponsiveBreakpoints.of(context).isMobile;
     final isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.easeOutCubic,
       padding: EdgeInsets.symmetric(
         horizontal: (!isMobile && !isTablet) ? 0 : 20,
         vertical: 20,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: isScrolled
+            ? null
+            : LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.white.withAlpha(25),
+                  Colors.white.withAlpha(51),
+                  Colors.white.withAlpha(128),
+                  Colors.white.withAlpha(194),
+                ],
+                stops: const [0.0, 0.3, 0.7, 1.0],
+              ),
+        color: isScrolled ? Colors.white : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha(26),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
+            color: Colors.black.withAlpha(isScrolled ? 26 : 13),
+            blurRadius: isScrolled ? 10 : 6,
+            offset: Offset(0, isScrolled ? 2 : 1),
           ),
         ],
       ),
@@ -66,7 +88,7 @@ class Header extends StatelessWidget {
                 for (final item in menuItems)
                   MenuItem(
                     text: item,
-                    onTap: () {},
+                    onTap: () => onMenuItemSelected(menuItems.indexOf(item)),
                   ),
               ],
             )

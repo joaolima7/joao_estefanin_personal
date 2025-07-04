@@ -15,7 +15,7 @@ class HeroBanner extends StatelessWidget {
     final sizeScreen = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: isMobile ? 500 : 600,
+      height: isMobile ? 500 : 700,
       width: double.infinity,
       child: Stack(
         fit: StackFit.expand,
@@ -24,9 +24,42 @@ class HeroBanner extends StatelessWidget {
             'assets/images/hero_section.jpg',
             fit: BoxFit.cover,
           ),
+
+          // Gradient superior para fusão com header
           Container(
-            color: Colors.black.withAlpha(105),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.center,
+                colors: [
+                  Colors.white,
+                  Colors.white.withAlpha(230),
+                  Colors.white.withAlpha(128),
+                  Colors.white.withAlpha(77),
+                  Colors.transparent,
+                ],
+                stops: const [0.0, 0.08, 0.15, 0.25, 0.4],
+              ),
+            ),
           ),
+
+          // Gradient inferior para escurecer o fundo
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withAlpha(51),
+                  Colors.black.withAlpha(105),
+                  Colors.black.withAlpha(128),
+                ],
+                stops: const [0.0, 0.4, 0.7, 1.0],
+              ),
+            ),
+          ),
+
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -90,7 +123,7 @@ class HeroBanner extends StatelessWidget {
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: isMobile ? 14 : 18,
-        color: Colors.white70,
+        color: Colors.white,
       ),
     );
   }
@@ -110,11 +143,9 @@ class HeroBanner extends StatelessWidget {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        StatItem(number: '200+', label: 'Clientes Atendidos'),
+        StatItem(number: '50+', label: 'Alunos Atendidos'),
         SizedBox(width: 40),
-        StatItem(number: '5 anos', label: 'de Experiência'),
-        SizedBox(width: 40),
-        StatItem(number: '98%', label: 'Taxa de Sucesso'),
+        StatItem(number: '4+', label: 'Anos de Experiência'),
       ],
     );
   }

@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:personal_trainer/presentation/components/mobile_menu_item.dart';
 import '../../config/appearance/app_colors.dart';
 
 class MobileDrawer extends StatelessWidget {
-  const MobileDrawer({super.key});
+  const MobileDrawer({
+    super.key,
+    required this.onMenuItemSelected,
+  });
 
-  final List<String> menuItems = const [
-    'Início',
-    'Sobre Mim',
-    'Formação',
-    'Serviços',
-    'Depoimentos',
-    'Contato',
-  ];
+  final ValueChanged<int> onMenuItemSelected;
+
+  final Map<String, IconData> menuItems = const {
+    'Início': HugeIcons.strokeRoundedHome06,
+    'Sobre Mim': HugeIcons.strokeRoundedInformationCircle,
+    'Formação': HugeIcons.strokeRoundedLibraries,
+    'Serviços': HugeIcons.strokeRoundedBodyPartMuscle,
+    'Depoimentos': HugeIcons.strokeRoundedConversation,
+    'Contato': HugeIcons.strokeRoundedContact02,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +88,11 @@ class MobileDrawer extends StatelessWidget {
       itemCount: menuItems.length,
       itemBuilder: (context, index) {
         return MobileMenuItem(
-          text: menuItems[index],
+          text: menuItems.keys.elementAt(index),
+          icon: menuItems.values.elementAt(index),
           onTap: () {
             Navigator.of(context).pop();
+            onMenuItemSelected(index);
           },
         );
       },

@@ -4,11 +4,13 @@ import '../../config/appearance/app_colors.dart';
 class MobileMenuItem extends StatefulWidget {
   final String text;
   final VoidCallback onTap;
+  final IconData icon;
 
   const MobileMenuItem({
     super.key,
     required this.text,
     required this.onTap,
+    required this.icon,
   });
 
   @override
@@ -142,7 +144,13 @@ class _MobileMenuItemState extends State<MobileMenuItem> with SingleTickerProvid
                               color: isActive ? AppColors.primary : AppColors.neutralGreyDark,
                               letterSpacing: isActive ? 0.5 : 0,
                             ),
-                            child: Text(widget.text),
+                            child: Row(
+                              spacing: 8,
+                              children: [
+                                Icon(widget.icon),
+                                Text(widget.text),
+                              ],
+                            ),
                           ),
                         ),
                         Transform.translate(

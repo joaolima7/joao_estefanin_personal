@@ -16,9 +16,8 @@ class AppRouter {
     }
 
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        body: Center(child: Text('Página não encontrada!')),
-      ),
+      builder: (_) => const HomeScreen(),
+      settings: RouteSettings(name: homeRoute),
     );
   }
 }
